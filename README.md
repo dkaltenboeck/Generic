@@ -1,2 +1,2 @@
 # Generic
-In the repository are the necesary .java Files for the task.
+In the repository are the necessary .java Files for the task.
