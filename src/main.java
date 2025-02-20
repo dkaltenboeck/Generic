@@ -2,6 +2,7 @@ package src;
 
 /**
  * The main class to test the GenericList stack functionality.
+ * @author: Daniel Kaltenboeck
  */
 public class main {
     /**
@@ -23,6 +24,7 @@ public class main {
             elementList.push("Skoda");
             elementList.push("Tesla");
             elementList.push("BYD");
+            elementList.push("Range Rover");
             elementList.push("Ferrari");
 
             // Show the last added element without removing it

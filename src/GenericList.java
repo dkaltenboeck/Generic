@@ -7,16 +7,16 @@ package src;
  */
 public class GenericList<T> {
     private T[] elements; // Array to store stack elements
-    private int rStack; // Current number of elements in the stack
-    private int oStack; // Maximum capacity of the stack
+    private int currentEl; // Current number of elements in the stack
+    private int overallEl; // Maximum capacity of the stack
 
     /**
      * Default constructor that initializes the stack with a default capacity of 10.
      */
     public GenericList() {
-        this.oStack = 10;
-        this.rStack = 0;
-        this.elements = (T[]) new Object[oStack]; // Initialize the array with size 10
+        this.overallEl = 10;
+        this.currentEl = 0;
+        this.elements = (T[]) new Object[overallEl]; // Initialize the array with size 10
     }
 
     /**
@@ -25,9 +25,9 @@ public class GenericList<T> {
      * @param size The maximum size of the stack.
      */
     public GenericList(int size) {
-        this.oStack = size;
-        this.rStack = 0;
-        this.elements = (T[]) new Object[oStack]; // Initialize the array with the given size
+        this.overallEl = size;
+        this.currentEl = 0;
+        this.elements = (T[]) new Object[overallEl]; // Initialize the array with the given size
     }
 
     /**
@@ -37,10 +37,11 @@ public class GenericList<T> {
      * @throws StackFullException If the stack is already full.
      */
     public void push(T element) throws StackFullException {
-        if (rStack >= oStack) {
+        if (currentEl >= overallEl) {
             throw new StackFullException("Stack is full! Cannot push element.");
         }
-        elements[rStack++] = element; // Insert at the correct position and increment rStack
+        elements[currentEl] = element; // Insert at the correct position and increment rStack
+        currentEl ++;
     }
 
     /**
@@ -50,12 +51,12 @@ public class GenericList<T> {
      * @throws StackEmptyException If the stack is empty.
      */
     public T pop() throws StackEmptyException {
-        if (rStack == 0) {
+        if (currentEl == 0) {
             throw new StackEmptyException("Stack is empty");
         }
-        T topElement = (T) elements[rStack - 1]; // Retrieve the last inserted element
-        elements[rStack - 1] = null; // Remove the element
-        rStack--; // Decrease the stack size
+        T topElement = (T) elements[currentEl - 1]; // Retrieve the last inserted element
+        elements[currentEl - 1] = null; // Remove the element
+        currentEl--; // Decrease the stack size
         return topElement; // Return the removed element
     }
 
@@ -66,10 +67,10 @@ public class GenericList<T> {
      * @throws StackEmptyException If the stack is empty.
      */
     public T peek() throws StackEmptyException {
-        if (rStack == 0) {
+        if (currentEl == 0) {
             throw new StackEmptyException("Stack is empty");
         }
-        return (T) elements[rStack - 1]; // Retrieve the top element without removing it
+        return (T) elements[currentEl - 1]; // Retrieve the top element without removing it
     }
 
     /**
@@ -79,7 +80,7 @@ public class GenericList<T> {
      */
     public String list() {
         String list = "";
-        for (int zaehler = 0; zaehler < rStack; zaehler++) {
+        for (int zaehler = 0; zaehler < currentEl; zaehler++) {
             if (elements[zaehler] != null) {
                 list = list + elements[zaehler] + "; ";
             }
